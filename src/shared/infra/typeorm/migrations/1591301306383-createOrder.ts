@@ -15,7 +15,7 @@ export class createOrder1591301306383 implements MigrationInterface {
           },
           {
             name: 'customer_id',
-            type: 'varchar'
+            type: 'uuid'
           },
           {
             name: 'created_at',

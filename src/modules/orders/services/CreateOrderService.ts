@@ -33,22 +33,27 @@ class CreateOrderService {
 
       const foundProduct = productsFound.find(produto => produto.id === product.id);
 
+      if(foundProduct){
+        if(foundProduct.quantity < product.quantity) throw new AppError(`Product ${product.id} is unavailable`);
+      }
+
       return {
         product_id: product.id,
         quantity: product.quantity,
         price: foundProduct?.price || 0
       }
     });
-  
+
     const order = await this.ordersRepository.create({
       customer,
       products: order_products
     });
 
+    await this.productsRepository.updateQuantity(products);
+
     delete order.customer_id;
 
     return order;
-
   }
 }
 

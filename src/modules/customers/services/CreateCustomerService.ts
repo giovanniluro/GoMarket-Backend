@@ -11,10 +11,7 @@ class CreateCustomerService {
   constructor(private customersRepository: ICustomersRepository) {}
 
   public async execute({ name, email }: IRequest): Promise<Customer> {
-    const emailExists = await this.customersRepository.findByEmail(email);
     
-    if(emailExists) throw new AppError("This email already exists.");
-
     const customer = await this.customersRepository.create({
       name,
       email

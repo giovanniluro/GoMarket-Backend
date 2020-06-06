@@ -23,7 +23,9 @@ export class createOrderProducts1591301912784 implements MigrationInterface {
           },
           {
             name: 'price',
-            type: 'float'
+            type: 'decimal',
+            precision: 6,
+            scale: 2
           },
           {
             name: 'quantity',
